@@ -1,64 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For You, Chany</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
-    <h1>For You, Chany 💖</h1>
-    <div id="login-section">
-        <p>Enter the code you found:</p>
-        <input type="password" id="codeInput" placeholder="Enter your code">
-        <button onclick="checkCode()">Submit</button>
+    <div class="stars"></div>
+    <div class="floating-hearts">
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💗</div>
+        <div class="heart">💝</div>
+        <div class="heart">💖</div>
     </div>
 
-    <div id="content-section" style="display: none;">
-        <div class="gallery">
-            <div class="photo-card">
-                <img src="images/photo1.jpg" alt="Photo 1">
-                <p>Ndakunda ingene utwenza. Actually jokes zaw ziratwenz.</p>
+    <div id="login-section" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="title">For You, Chany</h1>
+                <div class="subtitle">✨ A Special Collection ✨</div>
             </div>
-            <div class="photo-card">
-                <img src="images/photo2.jpg" alt="Photo 2">
-                <p>Kand usang waguma umubwir ngo agufotor urik uragir sourire forcé</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo3.jpg" alt="Photo 3">
-                <p>Iyo regard rer, hahhh.</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo4.jpg" alt="Photo 4">
-                <p>Iyi photo irakaze hahhh.</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo5.jpg" alt="Photo 5">
-                <p>Laughing always.</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo6.jpg" alt="Photo 6">
-                <p>Sinatahuy iy poster hahhhhh, ugum uberw nah ugir ivy wishakiy</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo7.jpg" alt="Photo 7">
-                <p>Aha warik uraba ik?</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo8.jpg" alt="Photo 8">
-                <p>Izo photo nzozibika</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo9.jpg" alt="Photo 9">
-                <p>Aha war kur regime.</p>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo10.jpg" alt="Photo 10">
-                <p>Be unstoppable.</p>
+            <div class="login-form">
+                <div class="input-group">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="codeInput" placeholder="Enter your secret code">
+                </div>
+                <button onclick="checkCode()" class="submit-btn">
+                    <span>Unlock Memories</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     </div>
 
+    <div id="page-selection" class="content-hidden">
+        <div class="page-selection-container">
+            <div class="selection-header">
+                <h2>Choose Your Journey 💕</h2>
+                <p>Select which memories you'd like to explore</p>
+            </div>
+
+            <div class="page-options">
+                <div class="page-option" onclick="showGallery('chany')" data-aos="fade-up" data-aos-delay="100">
+                    <div class="option-card">
+                        <div class="option-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Chany</h3>
+                        <p>Beautiful moments of you</p>
+                        <div class="option-overlay">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-option" onclick="showGallery('together')" data-aos="fade-up" data-aos-delay="200">
+                    <div class="option-card">
+                        <div class="option-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Chany & Josh</h3>
+                        <p>Our journey together</p>
+                        <div class="option-overlay">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content-section" class="content-hidden">
+        <div class="navigation-header">
+            <button onclick="goBackToSelection()" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Selection</span>
+            </button>
+        </div>
+
+        <div class="welcome-message">
+            <h2 id="gallery-title">Welcome to Our Memories 💕</h2>
+            <p id="gallery-subtitle">Each photo tells our beautiful story</p>
+        </div>
+
+        <div class="gallery" id="chany-gallery">
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo1.jpg" alt="Photo 1">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Ndakunda ingene utwenza. Actually jokes zaw ziratwenz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo2.jpg" alt="Photo 2">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Kand usang waguma umubwir ngo agufotor urik uragir sourire forcé</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo3.jpg" alt="Photo 3">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Iyo regard rer, hahhh.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo4.jpg" alt="Photo 4">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Iyi photo irakaze hahhh.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo5.jpg" alt="Photo 5">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Laughing always.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo6.jpg" alt="Photo 6">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Sinatahuy iy poster hahhhhh, ugum uberw nah ugir ivy wishakiy</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="700">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo7.jpg" alt="Photo 7">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Aha warik uraba ik?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="800">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo8.jpg" alt="Photo 8">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Izo photo nzozibika</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="900">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo9.jpg" alt="Photo 9">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Aha war kur regime.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="1000">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/photo10.jpg" alt="Photo 10">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Be unstoppable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery content-hidden" id="together-gallery">
+            <!-- Photo 1 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/1.jpg" alt="Chany and Josh Photo 1">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>For me this is one of our best selfies</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/2.jpg" alt="Chany and Josh Photo 2">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Umwaka turi kumw nawe kl. I feel in love again with you</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/3.jpg" alt="Chany and Josh Photo 3">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Dusangira akabisi n agahiye </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/4.jpg" alt="Chany and Josh Photo 4">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>I really like when you play you girly side. Biragutoka ukuntu walaih hahhh</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/5.jpg" alt="Chany and Josh Photo 5">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Ndakunda</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/6.jpg" alt="Chany and Josh Photo 6">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p> This photo have art inside of it . The way we look so in love</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 7 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="700">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/7.jpg" alt="Chany and Josh Photo 7">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p> Why izi posters twarazihevy??? Urabona ingene zatoka</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 8 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="800">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/8.jpg" alt="Chany and Josh Photo 8">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Love is not just smilling every time, nogufata agafoto nkako utwenger mu mutima ni expression ikaze</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 9 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="900">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/9.jpg" alt="Chany and Josh Photo 9">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Twari Dukwije amezi icenda</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 10 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="1000">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/10.jpg" alt="Chany and Josh Photo 10">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>I like eyour stylish side</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 11 -->
+            <div class="photo-card" data-aos="fade-up" data-aos-delay="1100">
+                <div class="card-inner">
+                    <div class="image-container">
+                        <img src="images/chany_and_josh/11.jpg" alt="Chany and Josh Photo 11">
+                        <div class="overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Munyuma ni kuraba ingene twongereza intoke , imigisha iguma itubana myinsh. Cause Babe You are a blessing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
