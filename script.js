@@ -72,13 +72,18 @@ function showGallery(type) {
     
     setTimeout(() => {
         pageSelection.style.display = 'none';
+        
+        // Show content section and reset display
+        contentSection.style.display = 'block';
         contentSection.classList.remove('content-hidden');
         contentSection.classList.add('content-visible');
         
         if (type === 'chany') {
             // Show Chany gallery
+            chanyGallery.style.display = 'grid';
             chanyGallery.classList.remove('content-hidden');
             chanyGallery.classList.add('content-visible');
+            togetherGallery.style.display = 'none';
             togetherGallery.classList.add('content-hidden');
             togetherGallery.classList.remove('content-visible');
             
@@ -86,8 +91,10 @@ function showGallery(type) {
             gallerySubtitle.textContent = 'Every photo captures your amazing spirit';
         } else if (type === 'together') {
             // Show Together gallery
+            togetherGallery.style.display = 'grid';
             togetherGallery.classList.remove('content-hidden');
             togetherGallery.classList.add('content-visible');
+            chanyGallery.style.display = 'none';
             chanyGallery.classList.add('content-hidden');
             chanyGallery.classList.remove('content-visible');
             
@@ -105,15 +112,24 @@ function showGallery(type) {
 function goBackToSelection() {
     const pageSelection = document.getElementById('page-selection');
     const contentSection = document.getElementById('content-section');
+    const chanyGallery = document.getElementById('chany-gallery');
+    const togetherGallery = document.getElementById('together-gallery');
     
     // Hide content section with animation
     contentSection.style.transform = 'translateY(-50px)';
     contentSection.style.opacity = '0';
     
     setTimeout(() => {
+        // Hide content section
         contentSection.style.display = 'none';
         contentSection.classList.add('content-hidden');
         contentSection.classList.remove('content-visible');
+        
+        // Hide both galleries and reset their states
+        chanyGallery.classList.add('content-hidden');
+        chanyGallery.classList.remove('content-visible');
+        togetherGallery.classList.add('content-hidden');
+        togetherGallery.classList.remove('content-visible');
         
         // Reset transform and opacity for next time
         contentSection.style.transform = '';
