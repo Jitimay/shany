@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -67,6 +68,19 @@
                         </div>
                         <h3>Chany & Josh</h3>
                         <p>Our journey together</p>
+                        <div class="option-overlay">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-option" onclick="showPoem()" data-aos="fade-up" data-aos-delay="300">
+                    <div class="option-card">
+                        <div class="option-icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
+                        <h3>A Poem for You</h3>
+                        <p>Words from the heart</p>
                         <div class="option-overlay">
                             <i class="fas fa-arrow-right"></i>
                         </div>
@@ -347,7 +361,8 @@
                         </div>
                     </div>
                     <div class="card-content">
-                        <p>Love is not just smilling every time, nogufata agafoto nkako utwenger mu mutima ni expression ikaze</p>
+                        <p>Love is not just smilling every time, nogufata agafoto nkako utwenger mu mutima ni expression
+                            ikaze</p>
                     </div>
                 </div>
             </div>
@@ -392,11 +407,103 @@
                         </div>
                     </div>
                     <div class="card-content">
-                        <p>Munyuma ni kuraba ingene twongereza intoke , imigisha iguma itubana myinsh. Cause Babe You are a blessing</p>
+                        <p>Munyuma ni kuraba ingene twongereza intoke , imigisha iguma itubana myinsh. Cause Babe You
+                            are a blessing</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Poem Section -->
+    <div id="poem-section" class="content-hidden">
+        <div class="navigation-header">
+            <button onclick="goBackToSelection()" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Selection</span>
+            </button>
+        </div>
+
+        <div class="poem-container">
+            <div class="poem-header" data-aos="fade-down">
+                <h2>For My Beautiful Chany 💕</h2>
+                <div class="poem-subtitle">A poem written from the heart</div>
+            </div>
+
+            <div class="poem-content" data-aos="fade-up" data-aos-delay="300">
+                <div class="poem-stanza">
+                    <p>Mukunzi wanje, ndagukunda cane.</p>
+                    <p>Kuva duhuy har Josh wa kare har na Josh wubu.</p>
+                    <p>Misi yose ndi kur etage(Akiwacu), ndakubony uje, har jambo ryama riza mu mutw, "ndahiriwe kl".</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>Uri mwiza cane, nama ndakuvuga hose abantu bakibaza yuko ndi mwi icupa, ndemeye nd imwicupa,</p>
+                    <p>icupa ry Urukunda, icupa rinyerek ibint aband bahungu batabony.</p>
+                    <p>Uri rare, kand uwukweger wese, abona agaciro ufis.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>Utuma nimenya, nkuva noguha vyose, ntisigarije.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>Uru rukundo, rimwe na rimw ruranter ubwoba kbr numv ububasha rufis,</p>
+                    <p>nkuv ndarubuz har igic ciwanj woba utwaye, niy mpavu,</p>
+                    <p>ndarubungabunga, nkarusenger eka nkanagwitaho.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>Namy nibaza naho nar gusenger umugore sinz ko nar gusenga neza kugira ngwe kur wew.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>Mukunzi wanje, uri uwigiciro kinini, kand ubimenye.</p>
+                    <p>Abant wama wibaza ko bakuvuga nabi, bensh mur abo bipfuz ubuzima bwaw,</p>
+                    <p>kumer nka we, kuko warahezagiwe.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>Ndiko ndandika mwijora mbona n umusi wose nowmara ndiko ndakwandikako.</p>
+                    <p>Ndakunda umubiri wawe, ndakunda umushaha waw.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>Iyaremeye vyose, nikuzigame kuko ufis intahe nini mur wew,</p>
+                    <p>kand ivyo ndavyizera ndabihamvya no kukurusha kuko,</p>
+                    <p>ur rukundo yashiz mu mutima wanj, runyerek na Chany wo mur kazoza.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p>hakaba har izind si n aband bantu nka tw,</p>
+                    <p>aba Josh bos bo mur univers bokwama bagutoy wew.</p>
+                    <p>Nyenyeri imurika gusumba izindi kayangana.</p>
+                </div>
+
+                <div class="poem-stanza">
+                    <p><strong>NDAGUKUNDA CANE MUKUNZI WANJE. NDAGUKUNDA.</strong></p>
+                </div>
+
+                <div class="poem-signature" data-aos="fade-up" data-aos-delay="600">
+                    <p>With all my love,</p>
+                    <p class="signature">Josh 💖</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="music/background.mp3" type="audio/mpeg">
+        <source src="music/background.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control Button -->
+    <div class="music-control">
+        <button id="musicToggle" onclick="toggleMusic()">
+            <i class="fas fa-music"></i>
+        </button>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -222,17 +222,221 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Add enter key support
-document.getElementById('codeInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        checkCode();
+document.addEventListener('DOMContentLoaded', function() {
+    const codeInput = document.getElementById('codeInput');
+    if (codeInput) {
+        codeInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkCode();
+            }
+        });
+
+        // Add input focus effects
+        codeInput.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'translateY(-2px)';
+        });
+
+        codeInput.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'translateY(0)';
+        });
     }
 });
+// Poem Section Function
+function showPoem() {
+    const pageSelection = document.getElementById('page-selection');
+    const poemSection = document.getElementById('poem-section');
 
-// Add input focus effects
-document.getElementById('codeInput').addEventListener('focus', function() {
-    this.parentElement.style.transform = 'translateY(-2px)';
-});
+    // Hide page selection with animation
+    pageSelection.style.transform = 'translateY(-50px)';
+    pageSelection.style.opacity = '0';
+    
+    setTimeout(() => {
+        pageSelection.style.display = 'none';
+        
+        // Show poem section
+        poemSection.style.display = 'block';
+        poemSection.classList.remove('content-hidden');
+        poemSection.classList.add('content-visible');
+        
+        // Trigger AOS refresh for poem items
+        setTimeout(() => {
+            AOS.refresh();
+        }, 100);
+    }, 500);
+}
 
-document.getElementById('codeInput').addEventListener('blur', function() {
-    this.parentElement.style.transform = 'translateY(0)';
-});
+// Update goBackToSelection to handle poem section
+function goBackToSelectionFromPoem() {
+    const pageSelection = document.getElementById('page-selection');
+    const poemSection = document.getElementById('poem-section');
+    
+    // Hide poem section with animation
+    poemSection.style.transform = 'translateY(-50px)';
+    poemSection.style.opacity = '0';
+    
+    setTimeout(() => {
+        // Hide poem section
+        poemSection.style.display = 'none';
+        poemSection.classList.add('content-hidden');
+        poemSection.classList.remove('content-visible');
+        
+        // Reset transform and opacity for next time
+        poemSection.style.transform = '';
+        poemSection.style.opacity = '';
+        
+        // Show page selection
+        pageSelection.style.display = 'block';
+        pageSelection.classList.remove('content-hidden');
+        pageSelection.classList.add('content-visible');
+        pageSelection.style.transform = '';
+        pageSelection.style.opacity = '';
+        
+        // Trigger AOS refresh
+        setTimeout(() => {
+            AOS.refresh();
+        }, 100);
+    }, 500);
+}
+
+// Enhanced goBackToSelection to handle all sections
+function goBackToSelection() {
+    const pageSelection = document.getElementById('page-selection');
+    const contentSection = document.getElementById('content-section');
+    const poemSection = document.getElementById('poem-section');
+    const chanyGallery = document.getElementById('chany-gallery');
+    const togetherGallery = document.getElementById('together-gallery');
+    
+    // Check which section is currently visible and hide it
+    if (contentSection.classList.contains('content-visible')) {
+        // Hide content section with animation
+        contentSection.style.transform = 'translateY(-50px)';
+        contentSection.style.opacity = '0';
+        
+        setTimeout(() => {
+            contentSection.style.display = 'none';
+            contentSection.classList.add('content-hidden');
+            contentSection.classList.remove('content-visible');
+            
+            // Hide both galleries and reset their states
+            chanyGallery.classList.add('content-hidden');
+            chanyGallery.classList.remove('content-visible');
+            togetherGallery.classList.add('content-hidden');
+            togetherGallery.classList.remove('content-visible');
+            
+            // Reset transform and opacity for next time
+            contentSection.style.transform = '';
+            contentSection.style.opacity = '';
+            
+            showPageSelection();
+        }, 500);
+    } else if (poemSection.classList.contains('content-visible')) {
+        // Hide poem section with animation
+        poemSection.style.transform = 'translateY(-50px)';
+        poemSection.style.opacity = '0';
+        
+        setTimeout(() => {
+            poemSection.style.display = 'none';
+            poemSection.classList.add('content-hidden');
+            poemSection.classList.remove('content-visible');
+            
+            // Reset transform and opacity for next time
+            poemSection.style.transform = '';
+            poemSection.style.opacity = '';
+            
+            showPageSelection();
+        }, 500);
+    }
+}
+
+function showPageSelection() {
+    const pageSelection = document.getElementById('page-selection');
+    
+    // Show page selection
+    pageSelection.style.display = 'block';
+    pageSelection.classList.remove('content-hidden');
+    pageSelection.classList.add('content-visible');
+    pageSelection.style.transform = '';
+    pageSelection.style.opacity = '';
+    
+    // Trigger AOS refresh
+    setTimeout(() => {
+        AOS.refresh();
+    }, 100);
+}
+
+// Music Control Functions
+let musicPlaying = false;
+const backgroundMusic = document.getElementById('backgroundMusic');
+const musicToggle = document.getElementById('musicToggle');
+
+function toggleMusic() {
+    if (musicPlaying) {
+        backgroundMusic.pause();
+        musicToggle.classList.remove('playing');
+        musicToggle.classList.add('paused');
+        musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+        musicPlaying = false;
+    } else {
+        backgroundMusic.play().catch(e => {
+            console.log('Music play failed:', e.message);
+            // Show a subtle notification that music file is missing
+            showMusicNotification('Add background.mp3 to music folder 🎵');
+        });
+        musicToggle.classList.add('playing');
+        musicToggle.classList.remove('paused');
+        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+        musicPlaying = true;
+    }
+}
+
+function showMusicNotification(message = 'Click to play music 🎵') {
+    // Create a subtle notification for music
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background: rgba(255, 107, 107, 0.9);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        z-index: 1001;
+        animation: fadeInOut 3s ease-in-out forwards;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification) notification.remove();
+    }, 3000);
+}
+
+// Auto-start music when user first interacts (after login)
+document.addEventListener('click', function autoStartMusic() {
+    if (!musicPlaying && backgroundMusic) {
+        backgroundMusic.play().catch(e => {
+            console.log('Music play failed - file may not exist yet');
+            // Hide music button if no music file
+            if (e.name === 'NotSupportedError') {
+                document.querySelector('.music-control').style.display = 'none';
+            }
+        });
+        musicToggle.classList.add('playing');
+        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+        musicPlaying = true;
+    }
+    // Remove this listener after first interaction
+    document.removeEventListener('click', autoStartMusic);
+}, { once: true });
+
+// Add fade in/out animation for music notification
+const musicStyle = document.createElement('style');
+musicStyle.textContent = `
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(10px); }
+        20%, 80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+    }
+`;
+document.head.appendChild(musicStyle);

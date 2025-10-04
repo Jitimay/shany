@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - For You, Chany</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>Debug - For You, Chany</h1>
+    
+    <div class="debug">
+        <h3>Testing Basic Functionality</h3>
+        <input type="password" id="codeInput" placeholder="Enter code: 354262">
+        <button onclick="testLogin()">Test Login</button>
+        <div id="result"></div>
+    </div>
+
+    <div class="debug">
+        <h3>File Checks</h3>
+        <div id="fileChecks"></div>
+    </div>
+
+    <script>
+        console.log('Debug page loaded');
+        
+        function testLogin() {
+            const code = document.getElementById('codeInput').value;
+            const result = document.getElementById('result');
+            
+            if (code === '354262') {
+                result.innerHTML = '<div class="success">✅ Login works!</div>';
+            } else {
+                result.innerHTML = '<div class="error">❌ Wrong code</div>';
+            }
+        }
+
+        // Test file loading
+        function checkFiles() {
+            const checks = document.getElementById('fileChecks');
+            let html = '';
+            
+            // Test if we can load script.js
+            fetch('script.js')
+                .then(response => {
+                    if (response.ok) {
+                        html += '<div class="success">✅ script.js loads</div>';
+                    } else {
+                        html += '<div class="error">❌ script.js failed to load</div>';
+                    }
+                    checks.innerHTML = html;
+                })
+                .catch(e => {
+                    html += '<div class="error">❌ script.js error: ' + e.message + '</div>';
+                    checks.innerHTML = html;
+                });
+        }
+
+        checkFiles();
+    </script>
+</body>
+</html>
